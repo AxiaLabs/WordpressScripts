@@ -2,7 +2,7 @@
 domain_name=""
 email=""
 client=""
-client_slug=""
+client_slug="" # Should Match client variable but with "-"s instead of spaces. No special Characters
 client_phrase=""
 client_address=""
 client_city=""
@@ -77,13 +77,16 @@ wp menu item add-post support-menu $termsId --title="Shipping And Returns"
 wp menu item add-post support-menu $privacyId --title="Privacy Statement"
 
 #Set WP Options
-wp option update siteurl "https://' . $_SERVER['HTTP_HOST'] . '/'"
-wp option update home "https://' . $_SERVER['HTTP_HOST'] . '/'"
+wp config set WP_SITEURL "https://www.$domain_name"
+wp option update siteurl "https://www.$domain_name"
+wp config set WP_HOME "https://www.$domain_name"
+wp option update home "https://www.$domain_name"
 wp option update blogname "$client"
 wp option update blogdescription "$client_phrase"
 wp option update admin_email "$email"
 wp option update permalink_structure '/%postname%/'
 wp option update wp_page_for_privacy_policy $privacyId
+
 
 #SET WOOCOMMERCE OPTIONS
 wp option update woocommerce_store_address "$client_address"
