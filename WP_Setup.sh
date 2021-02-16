@@ -52,7 +52,7 @@ wp plugin install imagify --activate
 wp plugin install filebird --activate
 
 wp plugin install wordfence --activate
-wp plugin install wp-hide-login --activate
+wp plugin install wps-hide-login --activate
 wp plugin install antispam-bee --activate
 wp plugin install wp-mail-smtp --activate
 
