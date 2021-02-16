@@ -46,4 +46,4 @@ wp option update woocommerce_myaccount_downloads_endpoint ""
 ###############################
 ### Remove Script  ###
 ###############################
-sudo rm ~/apps/wordpress/htdocs/Woocommerce_Setup.sh
+sudo rm /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh

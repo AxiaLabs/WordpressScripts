@@ -124,9 +124,9 @@ sudo /opt/bitnami/ctlscript.sh restart apache
 
 # ASK FOR WOOCOMMERCE
 while true; do
-    read -p "Do you wish to install Woocommerce?" yn
+    read -p "Do you wish to install Woocommerce? (y/n) cd ." yn
     case $yn in
-        [Yy]* ) curl https://raw.githubusercontent.com/RobertUpchurch/WordpressScripts/main/Woocommerce_Setup.sh -o Woocommerce_Setup.sh && sudo chmod 700 ./Woocommerce_Setup.sh && ./Woocommerce_Setup.sh; break;;
+        [Yy]* ) curl https://raw.githubusercontent.com/RobertUpchurch/WordpressScripts/main/Woocommerce_Setup.sh -o /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh && sudo chmod 700 ./Woocommerce_Setup.sh && ./Woocommerce_Setup.sh; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
