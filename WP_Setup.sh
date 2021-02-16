@@ -1,38 +1,19 @@
 #######################
 ### User Variable  ####
 #######################
-
-domain_name="" #exclude https://
-email=""
-client=""
-client_slug="" # Should Match client variable but with "-"s instead of spaces. No special Characters
-client_phrase=""
-client_address=""
-client_city=""
-client_state="" #SHOULD BE STATE ABBREVIATION (UT, AZ, etc)
-client_zip=""
-
-client_primary_color=""
-
-SES_region=""
-SES_user=""
-SES_pass=""
-
-ImagifyApiKey=""
+read -e -p "Whats the domain name? https://www." domain_name
+read -e -p "What's the admin email address? " email
+read -e -p "Client Name / Site Name? " client
+read -e -p "What's the client slug? " client_slug
+read -e -p "Whats the client phrase? (Leave blank for none) " client_phrase
+read -e -p "What's the SES region? " -i "us-west-2" SES_region
+read -e -p "Enter the SES username: " SES_user
+read -e -p "Enter the SES password: " SES_pass
+read -e -p "Enter the Imagify API Key: " ImagifyApiKey
 
 #####################
 ### Installation ####
 #####################
-
-# # Bitnami Permisions
-# mkdir ~/apps/wordpress/htdocs/wp-content/upgrade
-# sudo chown bitnami:daemon ~/apps/wordpress/htdocs/wp-content/upgrade
-# sudo chmod 775 ~/apps/wordpress/htdocs/wp-content/upgrade
-
-# # WP CLI
-# curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-# chmod +x wp-cli.phar
-# sudo mv wp-cli.phar /usr/local/bin/wp
 
 sudo wp core update --allow-root
 sudo chown -R daemon /apps/wordpress/htdocs
@@ -64,22 +45,16 @@ wp user create rob rob@axialabs.com --role=administrator --user_pass=AxiaLabs123
 wp user create demitri demitri@axialabs.com --role=administrator --user_pass=AxiaLabs123
 
 # Plugins
-wp plugin install wp-mail-smtp --activate
 wp plugin install elementor --activate
+wp plugin install advanced-custom-fields --activate
+
 wp plugin install imagify --activate
-wp plugin install megamenu --activate
-wp plugin install admin-menu-editor --activate
+wp plugin install filebird --activate
 
-#Security Plugins
 wp plugin install wordfence --activate
-wp plugin install wps-hide-login --activate
-
-# #BuddyPress
-# wp plugin install buddypress --activate
-
-# # WooCommerce
-# wp plugin install woocommerce --activate
-# wp plugin install advanced-coupons-for-woocommerce-free --activate
+wp plugin install wp-hide-login --activate
+wp plugin install antispam-bee --activate
+wp plugin install wp-mail-smtp --activate
 
 # Themes
 wp theme update --all
@@ -87,10 +62,6 @@ wp theme install hello-elementor
 
 # Child Theme
 wp scaffold child-theme $client_slug --parent_theme=hello-elementor --theme_name="$client Theme" --author="Axia Labs" --author_uri="https://axialabs.com" --activate
-mkdir /home/bitnami/apps/wordpress/htdocs/wp-content/themes/$client_slug/woocommerce
-mkdir /home/bitnami/apps/wordpress/htdocs/wp-content/themes/$client_slug/woocommerce/loop
-sudo cp -r /home/bitnami/apps/wordpress/htdocs/wp-content/plugins/woocommerce/templates/loop/ /home/bitnami/apps/wordpress/htdocs/wp-content/themes/$client_slug/woocommerce/
-sudo chown -R bitnami:bitnami  /home/bitnami/apps/wordpress/htdocs/wp-content/themes/$client_slug/woocommerce/loop
 
 # Pages
 homeId=$(wp post create --post_type="page" --post_title="Home" --post_status="publish" --post_author="2" --porcelain)
@@ -98,7 +69,6 @@ blogId=$(wp post create --post_type="page" --post_title="Blog" --post_status="pu
 aboutId=$(wp post create --post_type="page" --post_title="About Us" --post_status="publish" --post_author="2" --porcelain)
 contactId=$(wp post create --post_type="page" --post_title="Contact Us" --post_status="publish" --post_author="2" --porcelain)
 termsId=$(wp post create --post_type="page" --post_title="Terms & Conditions" --post_status="publish" --post_author="2" --porcelain)
-shippingId=$(wp post create --post_type="page" --post_title="Shipping And Returns" --post_status="publish" --post_author="2" --porcelain)
 privacyId=$(wp post create --post_type="page" --post_title="Privacy Statement" --post_status="publish" --post_author="2" --porcelain)
 
 #Menus
@@ -110,7 +80,6 @@ wp menu item add-post header-menu $contactId --title="Contact Us"
 
 wp menu create "support-menu"
 wp menu item add-post support-menu $termsId --title="Terms & Conditions"
-wp menu item add-post support-menu $termsId --title="Shipping And Returns"
 wp menu item add-post support-menu $privacyId --title="Privacy Statement"
 
 ########################
@@ -135,24 +104,6 @@ wp option update permalink_structure '/%postname%/'
 wp option update wp_page_for_privacy_policy $privacyId
 
 
-# Woocommerce
-# wp option update woocommerce_store_address "$client_address"
-# wp option update woocommerce_store_city "$client_city"
-# wp option update woocommerce_store_postcode "$client_zip"
-# wp option update woocommerce_default_country "US:$client_state"
-# wp option update woocommerce_currency "USD"
-# wp option update woocommerce_weight_unit "lbs"
-# wp option update woocommerce_dimension_unit "in"
-# wp option update woocommerce_registration_generate_password no
-# wp option update woocommerce_email_from_address "orders@$domain_name"
-# wp option update woocommerce_email_from_name "$client"
-# wp option update woocommerce_email_footer_text "(site_title}. 2021."
-# wp option update woocommerce_email_background_color "#D3D3D3"
-# wp option update woocommerce_email_base_color $client_primary_color
-# wp option update woocommerce_email_body_background_color "#FFF"
-# wp option update woocommerce_email_text_color "#000"
-# wp option update woocommerce_myaccount_downloads_endpoint ""
-
 # Mail SMTP
 echo "support@$domain_name" | wp option patch insert wp_mail_smtp mail from_email
 echo "$client"              | wp option patch insert wp_mail_smtp mail from_name
@@ -172,6 +123,15 @@ echo 1 | wp option patch update imagify_settings display_webp
 sudo /opt/bitnami/apps/wordpress/bnconfig --disable_banner 1
 sudo /opt/bitnami/ctlscript.sh restart apache
 
+# ASK FOR WOOCOMMERCE
+while true; do
+    read -p "Do you wish to install this program?" yn
+    case $yn in
+        [Yy]* ) ./Woocommerce_Setup; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
 ########################
 ### SSL  ###############
