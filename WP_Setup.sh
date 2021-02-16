@@ -92,10 +92,10 @@ wp option update page_for_posts $blogId
 
 
 # Wordpress
-wp config set WP_SITEURL "https://$domain_name"
-wp option update siteurl "https://$domain_name"
-wp config set WP_HOME "https://$domain_name"
-wp option update home "https://$domain_name"
+wp config set WP_SITEURL "https://www.$domain_name"
+wp option update siteurl "https://www.$domain_name"
+wp config set WP_HOME "https://www.$domain_name"
+wp option update home "https://www.$domain_name"
 wp option update blogname "$client"
 wp option update blogdescription "$client_phrase"
 wp option update admin_email "$email"
@@ -124,9 +124,9 @@ sudo /opt/bitnami/ctlscript.sh restart apache
 
 # ASK FOR WOOCOMMERCE
 while true; do
-    read -p "Do you wish to install Woocommerce? (y/n) cd ." yn
+    read -p "Do you wish to install Woocommerce? (y/n) " yn
     case $yn in
-        [Yy]* ) curl https://raw.githubusercontent.com/RobertUpchurch/WordpressScripts/main/Woocommerce_Setup.sh -o /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh && sudo chmod 700 ./Woocommerce_Setup.sh && ./Woocommerce_Setup.sh; break;;
+        [Yy]* ) curl https://raw.githubusercontent.com/RobertUpchurch/WordpressScripts/main/Woocommerce_Setup.sh -o /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh && sudo chmod 700 /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh && /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -147,5 +147,8 @@ sudo chown bitnami ~/apps/wordpress/htdocs/wp-config.php
 ########################
 ### SSL  ###############
 ########################
-echo "Configuration Complete: Set Up SSL with previous command before processing."
 sudo /opt/bitnami/bncert-tool
+echo "Configuration Complete: Set Up SSL with the following command"
+echo
+echo "sudo /opt/bitnami/bncert-tool"
+echo
