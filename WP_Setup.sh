@@ -19,6 +19,7 @@ sudo wp core update --allow-root
 sudo chown -R daemon ~/apps/wordpress/htdocs
 sudo chown -R bitnami ~/apps/wordpress/htdocs/wp-content
 sudo chown bitnami ~/apps/wordpress/htdocs/wp-config.php
+sudo chown bitnami ~/apps/wordpress/htdocs/WP_Setup.sh
 
 #################
 ### Clean Up ####
@@ -128,7 +129,7 @@ sudo /opt/bitnami/ctlscript.sh restart apache
 while true; do
     read -p "Do you wish to install Woocommerce?" yn
     case $yn in
-        [Yy]* ) curl https://raw.githubusercontent.com/RobertUpchurch/WordpressScripts/main/Woocommerce_Setup.sh -o ~Woocommerce_Setup.sh && sudo chmod 700 ./Woocommerce_Setup.sh && ./Woocommerce_Setup.sh; break;;
+        [Yy]* ) curl https://raw.githubusercontent.com/RobertUpchurch/WordpressScripts/main/Woocommerce_Setup.sh -o Woocommerce_Setup.sh && sudo chmod 700 ./Woocommerce_Setup.sh && ./Woocommerce_Setup.sh; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
