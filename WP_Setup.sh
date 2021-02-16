@@ -12,11 +12,11 @@ read -p "Enter the SES password: " SES_pass
 read -p "Enter the Imagify API Key: " ImagifyApiKey
 
 #####################
-### Installation ####
+### Permission Release ####
 #####################
 
 sudo wp core update --allow-root
-sudo chown -R daemon ~/apps/wordpress/htdocs
+sudo chown -R bitnami ~/apps/wordpress/htdocs
 sudo chown -R bitnami ~/apps/wordpress/htdocs/wp-content
 sudo chown bitnami ~/apps/wordpress/htdocs/wp-config.php
 sudo chown bitnami ~/apps/wordpress/htdocs/WP_Setup.sh
@@ -134,6 +134,18 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
+
+###############################
+### Remove Script  ###
+###############################
+sudo rm ~/apps/wordpress/htdocs/WP_Setup.sh
+
+###############################
+### Set Correct Permission  ###
+###############################
+sudo chown -R daemon ~/apps/wordpress/htdocs
+sudo chown -R bitnami ~/apps/wordpress/htdocs/wp-content
+sudo chown bitnami ~/apps/wordpress/htdocs/wp-config.php
 
 ########################
 ### SSL  ###############

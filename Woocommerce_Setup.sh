@@ -42,3 +42,8 @@ wp option update woocommerce_email_base_color $client_primary_color
 wp option update woocommerce_email_body_background_color "#FFF"
 wp option update woocommerce_email_text_color "#000"
 wp option update woocommerce_myaccount_downloads_endpoint ""
+
+###############################
+### Remove Script  ###
+###############################
+sudo rm ~/apps/wordpress/htdocs/Woocommerce_Setup.sh
