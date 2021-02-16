@@ -51,10 +51,11 @@ wp plugin install advanced-custom-fields --activate
 wp plugin install imagify --activate
 wp plugin install filebird --activate
 
-wp plugin install wordfence --activate
 wp plugin install wps-hide-login --activate
 wp plugin install antispam-bee --activate
+
 wp plugin install wp-mail-smtp --activate
+wp plugin install wordfence
 
 # Themes
 wp theme update --all
@@ -127,7 +128,7 @@ sudo /opt/bitnami/ctlscript.sh restart apache
 while true; do
     read -p "Do you wish to install Woocommerce?" yn
     case $yn in
-        [Yy]* ) ./Woocommerce_Setup.sh; break;;
+        [Yy]* ) curl https://raw.githubusercontent.com/RobertUpchurch/WordpressScripts/main/Woocommerce_Setup.sh -o ~Woocommerce_Setup.sh && sudo chmod 700 ./Woocommerce_Setup.sh && ./Woocommerce_Setup.sh; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac

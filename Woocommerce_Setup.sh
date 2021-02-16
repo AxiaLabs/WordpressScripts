@@ -1,11 +1,11 @@
 #######################
 ### User Variable  ####
 #######################
-read "What's the client address? " client_address
-read "What's the client city? " client_city
-read "What's the client state abbreviation: " client_state
-read "What's the client Zipcode? " client_zip
-read "Enter HEX for client primary color: ( ex. #FAFAFA ) " client_primary_color
+read -p "What's the client address? " client_address
+read -p "What's the client city? " client_city
+read -p "What's the client state abbreviation: " client_state
+read -p "What's the client Zipcode? " client_zip
+read -p "Enter HEX for client primary color: ( ex. #FAFAFA ) " client_primary_color
 
 #######################
 ### Plugins  ##########
