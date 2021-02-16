@@ -1,15 +1,15 @@
 #######################
 ### User Variable  ####
 #######################
-read -e -p "Whats the domain name? https://www." domain_name
-read -e -p "What's the admin email address? " email
-read -e -p "Client Name / Site Name? " client
-read -e -p "What's the client slug? " client_slug
-read -e -p "Whats the client phrase? (Leave blank for none) " client_phrase
-read -e -p "What's the SES region? " -i "us-west-2" SES_region
-read -e -p "Enter the SES username: " SES_user
-read -e -p "Enter the SES password: " SES_pass
-read -e -p "Enter the Imagify API Key: " ImagifyApiKey
+read -p "Whats the domain name? https://www." domain_name
+read -p "What's the admin email address? " email
+read -p "Client Name / Site Name? " client
+read -p "What's the client slug? " client_slug
+read -p "Whats the client phrase? (Leave blank for none) " client_phrase
+read -p "What's the SES region? " -i "us-west-2" SES_region
+read -p "Enter the SES username: " SES_user
+read -p "Enter the SES password: " SES_pass
+read -p "Enter the Imagify API Key: " ImagifyApiKey
 
 #####################
 ### Installation ####
