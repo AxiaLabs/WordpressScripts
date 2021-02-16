@@ -16,9 +16,9 @@ read -p "Enter the Imagify API Key: " ImagifyApiKey
 #####################
 
 sudo wp core update --allow-root
-sudo chown -R daemon /apps/wordpress/htdocs
-sudo chown -R bitnami /apps/wordpress/htdocs/wp-content
-sudo chown bitnami /apps/wordpress/htdocs/wp-config.php
+sudo chown -R daemon ~/apps/wordpress/htdocs
+sudo chown -R bitnami ~/apps/wordpress/htdocs/wp-content
+sudo chown bitnami ~/apps/wordpress/htdocs/wp-config.php
 
 #################
 ### Clean Up ####
