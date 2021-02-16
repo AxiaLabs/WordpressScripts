@@ -125,9 +125,9 @@ sudo /opt/bitnami/ctlscript.sh restart apache
 
 # ASK FOR WOOCOMMERCE
 while true; do
-    read -p "Do you wish to install this program?" yn
+    read -p "Do you wish to install Woocommerce?" yn
     case $yn in
-        [Yy]* ) ./Woocommerce_Setup; break;;
+        [Yy]* ) ./Woocommerce_Setup.sh; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
