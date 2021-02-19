@@ -101,6 +101,7 @@ wp option update blogdescription "$client_phrase"
 wp option update admin_email "$email"
 wp option update permalink_structure '/%postname%/'
 wp option update wp_page_for_privacy_policy $privacyId
+wp option update uploads_use_yearmonth_folders 0
 
 
 # Mail SMTP

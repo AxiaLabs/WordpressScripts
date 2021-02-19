@@ -43,6 +43,9 @@ wp option update woocommerce_email_body_background_color "#FFF"
 wp option update woocommerce_email_text_color "#000"
 wp option update woocommerce_myaccount_downloads_endpoint ""
 
+wp option update default_role customer
+wp option update users_can_register 1
+
 ###############################
 ### Remove Script  ###
 ###############################
