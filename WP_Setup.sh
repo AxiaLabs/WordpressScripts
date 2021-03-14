@@ -1,7 +1,7 @@
 #######################
 ### User Variable  ####
 #######################
-read -p "Whats the domain name? https://www." domain_name
+read -p "Whats the domain name? https://" domain_name
 read -p "What's the admin email address? " email
 read -p "Client Name / Site Name? " client
 read -p "What's the client slug? " client_slug
@@ -92,10 +92,10 @@ wp option update page_for_posts $blogId
 
 
 # Wordpress
-wp config set WP_SITEURL "https://www.$domain_name"
-wp option update siteurl "https://www.$domain_name"
-wp config set WP_HOME "https://www.$domain_name"
-wp option update home "https://www.$domain_name"
+wp config set WP_SITEURL "https://$domain_name"
+wp option update siteurl "https://$domain_name"
+wp config set WP_HOME "https://$domain_name"
+wp option update home "https://$domain_name"
 wp option update blogname "$client"
 wp option update blogdescription "$client_phrase"
 wp option update admin_email "$email"
@@ -105,7 +105,7 @@ wp option update uploads_use_yearmonth_folders 0
 
 
 # Mail SMTP
-echo "support@$domain_name" | wp option patch insert wp_mail_smtp mail from_email
+echo "contact@$domain_name" | wp option patch insert wp_mail_smtp mail from_email
 echo "$client"              | wp option patch insert wp_mail_smtp mail from_name
 echo "smtp"                 | wp option patch insert wp_mail_smtp mail mailer
 echo "false"                | wp option patch insert wp_mail_smtp mail from_email_force
