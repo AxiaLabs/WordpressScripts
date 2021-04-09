@@ -11,6 +11,13 @@ read -p "Whats the client phrase? " client_phrase
 # read -p "Enter the SES password: " SES_pass
 # read -p "Enter the Imagify API Key: " ImagifyApiKey
 
+########################
+## Permissions #########
+########################
+
+sudo chown -R bitnami:daemon ~/apps/wordpress/htdocs
+
+
 #################
 ### Clean Up ####
 #################
@@ -120,7 +127,7 @@ while true; do
     read -p "Do you wish to install Woocommerce? (y/n) " yn
     case $yn in
         [Yy]* ) curl https://raw.githubusercontent.com/RobertUpchurch/WordpressScripts/main/Woocommerce_Setup.sh -o /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh && sudo chmod 700 /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh && /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh; break;;
-        [Nn]* ) break;;
+        [Nn]* ) echo "Skipping WooCommerce"; break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
@@ -133,9 +140,8 @@ sudo rm ~/apps/wordpress/htdocs/WP_Setup.sh
 ###############################
 ### Set Correct Permission  ###
 ###############################
-# sudo chown -R daemon ~/apps/wordpress/htdocs
-# sudo chown -R bitnami ~/apps/wordpress/htdocs/wp-content
-# sudo chown bitnami ~/apps/wordpress/htdocs/wp-config.php
+sudo chown -R bitnami:daemon ~/apps/wordpress/htdocs
+sudo chown bitnami:bitnami ~/apps/wordpress/htdocs/wp-config.php
 
 ########################
 ### SSL  ###############
