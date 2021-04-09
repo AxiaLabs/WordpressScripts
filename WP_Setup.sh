@@ -5,18 +5,11 @@ read -p "Whats the domain name? https://" domain_name
 read -p "What's the admin email address? " email
 read -p "Client Name / Site Name? " client
 read -p "What's the client slug? " client_slug
-read -p "Whats the client phrase? (Leave blank for none) " client_phrase
-read -p "What's the SES region? " -i "us-west-2" SES_region
-read -p "Enter the SES username: " SES_user
-read -p "Enter the SES password: " SES_pass
-read -p "Enter the Imagify API Key: " ImagifyApiKey
-
-#####################
-### Permission Release ####
-#####################
-
-sudo wp core update --allow-root
-sudo chown -R bitnami ~/apps/wordpress/htdocs
+read -p "Whats the client phrase? " client_phrase
+# read -p "What's the SES region? " -i "us-west-2" SES_region
+# read -p "Enter the SES username: " SES_user
+# read -p "Enter the SES password: " SES_pass
+# read -p "Enter the Imagify API Key: " ImagifyApiKey
 
 #################
 ### Clean Up ####
@@ -44,14 +37,13 @@ wp user create demitri demitri@axialabs.com --role=administrator --user_pass=Axi
 
 # Plugins
 wp plugin install elementor --activate
+wp plugin install ele-custom-skin --activate
 wp plugin install advanced-custom-fields --activate
-
-wp plugin install imagify --activate
+wp plugin install fakerpress --activate
 wp plugin install filebird --activate
-
+wp plugin install imagify --activate
 wp plugin install wps-hide-login --activate
 wp plugin install antispam-bee --activate
-
 wp plugin install wp-mail-smtp --activate
 wp plugin install wordfence
 
@@ -105,19 +97,19 @@ wp option update uploads_use_yearmonth_folders 0
 
 
 # Mail SMTP
-echo "contact@$domain_name" | wp option patch insert wp_mail_smtp mail from_email
-echo "$client"              | wp option patch insert wp_mail_smtp mail from_name
-echo "smtp"                 | wp option patch insert wp_mail_smtp mail mailer
-echo "false"                | wp option patch insert wp_mail_smtp mail from_email_force
-echo "email-smtp.$SES_region.amazonaws.com" | wp option patch insert wp_mail_smtp smtp host
-echo "$SES_user"            | wp option patch insert wp_mail_smtp smtp user
-echo "$SES_pass"            | wp option patch insert wp_mail_smtp smtp pass
-echo "tls"                  | wp option patch insert wp_mail_smtp smtp encryption
-echo "587"                  | wp option patch insert wp_mail_smtp smtp port
+# echo "contact@$domain_name" | wp option patch insert wp_mail_smtp mail from_email
+# echo "$client"              | wp option patch insert wp_mail_smtp mail from_name
+# echo "smtp"                 | wp option patch insert wp_mail_smtp mail mailer
+# echo "false"                | wp option patch insert wp_mail_smtp mail from_email_force
+# echo "email-smtp.$SES_region.amazonaws.com" | wp option patch insert wp_mail_smtp smtp host
+# echo "$SES_user"            | wp option patch insert wp_mail_smtp smtp user
+# echo "$SES_pass"            | wp option patch insert wp_mail_smtp smtp pass
+# echo "tls"                  | wp option patch insert wp_mail_smtp smtp encryption
+# echo "587"                  | wp option patch insert wp_mail_smtp smtp port
 
 # Imagify 
-echo "$ImagifyApiKey" | wp option patch update imagify_settings api_key
-echo 1 | wp option patch update imagify_settings display_webp
+# echo "$ImagifyApiKey" | wp option patch update imagify_settings api_key
+# echo 1 | wp option patch update imagify_settings display_webp
 
 # BITNAMI
 sudo /opt/bitnami/apps/wordpress/bnconfig --disable_banner 1
@@ -128,7 +120,7 @@ while true; do
     read -p "Do you wish to install Woocommerce? (y/n) " yn
     case $yn in
         [Yy]* ) curl https://raw.githubusercontent.com/RobertUpchurch/WordpressScripts/main/Woocommerce_Setup.sh -o /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh && sudo chmod 700 /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh && /home/bitnami/apps/wordpress/htdocs/Woocommerce_Setup.sh; break;;
-        [Nn]* ) exit;;
+        [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
@@ -141,9 +133,9 @@ sudo rm ~/apps/wordpress/htdocs/WP_Setup.sh
 ###############################
 ### Set Correct Permission  ###
 ###############################
-sudo chown -R daemon ~/apps/wordpress/htdocs
-sudo chown -R bitnami ~/apps/wordpress/htdocs/wp-content
-sudo chown bitnami ~/apps/wordpress/htdocs/wp-config.php
+# sudo chown -R daemon ~/apps/wordpress/htdocs
+# sudo chown -R bitnami ~/apps/wordpress/htdocs/wp-content
+# sudo chown bitnami ~/apps/wordpress/htdocs/wp-config.php
 
 ########################
 ### SSL  ###############
