@@ -141,7 +141,6 @@ sudo rm ~/apps/wordpress/htdocs/WP_Setup.sh
 ### Set Correct Permission  ###
 ###############################
 sudo chown -R bitnami:daemon ~/apps/wordpress/htdocs
-sudo chown bitnami:bitnami ~/apps/wordpress/htdocs/wp-config.php
 
 ########################
 ### SSL  ###############
