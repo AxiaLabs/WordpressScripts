@@ -6,6 +6,10 @@ read -p "What's the admin email address? " email
 read -p "Client Name / Site Name? " client
 read -p "What's the client slug? " client_slug
 read -p "Whats the client phrase? " client_phrase
+
+read -p "Enter new admin username" admin_username
+read -p "Enter new admin email" admin_email
+read -p "Enter new admin password" admin_password
 # read -p "What's the SES region? " -i "us-west-2" SES_region
 # read -p "Enter the SES username: " SES_user
 # read -p "Enter the SES password: " SES_pass
@@ -39,8 +43,7 @@ wp theme delete --all
 ########################
 
 # Users
-wp user create rob rob@axialabs.com --role=administrator --user_pass=AxiaLabs123
-wp user create demitri demitri@axialabs.com --role=administrator --user_pass=AxiaLabs123
+wp user create $admin_username $admin_email --role=administrator --user_pass=$admin_password
 
 # Plugins
 wp plugin install elementor --activate
