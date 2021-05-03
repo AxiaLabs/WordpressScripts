@@ -7,20 +7,13 @@ read -p "Client Name / Site Name? " client
 read -p "What's the client slug? " client_slug
 read -p "Whats the client phrase? " client_phrase
 
-read -p "Enter new admin username" admin_username
-read -p "Enter new admin email" admin_email
-read -p "Enter new admin password" admin_password
+read -p "Enter new admin username: " admin_username
+read -p "Enter new admin email: " admin_email
+read -p "Enter new admin password: " admin_password
 # read -p "What's the SES region? " -i "us-west-2" SES_region
 # read -p "Enter the SES username: " SES_user
 # read -p "Enter the SES password: " SES_pass
 # read -p "Enter the Imagify API Key: " ImagifyApiKey
-
-########################
-## Permissions #########
-########################
-
-sudo chown -R bitnami:daemon ~/apps/wordpress/htdocs
-
 
 #################
 ### Clean Up ####
