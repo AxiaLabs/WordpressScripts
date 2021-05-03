@@ -95,7 +95,7 @@ wp option update wp_page_for_privacy_policy $privacyId
 wp option update uploads_use_yearmonth_folders 0
 
 #UPDATE TO USE HTTPS
-sudo sed -i 's/http:/https:/' /apps/wordpress/htdocs/wp-config.php
+sudo sed -i 's/http:/https:/' apps/wordpress/htdocs/wp-config.php
 
 # Mail SMTP
 # echo "contact@$domain_name" | wp option patch insert wp_mail_smtp mail from_email
