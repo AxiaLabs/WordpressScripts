@@ -45,18 +45,6 @@ wp theme delete --all
 # Users
 wp user create $admin_username $admin_email --role=administrator --user_pass=$admin_password
 
-# Plugins
-wp plugin install elementor --activate
-wp plugin install ele-custom-skin --activate
-wp plugin install advanced-custom-fields --activate
-wp plugin install fakerpress --activate
-wp plugin install filebird --activate
-wp plugin install imagify --activate
-wp plugin install wps-hide-login --activate
-wp plugin install antispam-bee --activate
-wp plugin install wp-mail-smtp --activate
-wp plugin install wordfence
-
 # Themes
 wp theme update --all
 wp theme install hello-elementor
@@ -82,6 +70,18 @@ wp menu item add-post header-menu $contactId --title="Contact Us"
 wp menu create "support-menu"
 wp menu item add-post support-menu $termsId --title="Terms & Conditions"
 wp menu item add-post support-menu $privacyId --title="Privacy Statement"
+
+# Plugins
+wp plugin install elementor --activate
+wp plugin install ele-custom-skin --activate
+wp plugin install advanced-custom-fields --activate
+wp plugin install fakerpress --activate
+wp plugin install filebird --activate
+wp plugin install imagify --activate
+wp plugin install wps-hide-login --activate
+wp plugin install antispam-bee --activate
+wp plugin install wp-mail-smtp --activate
+wp plugin install wordfence
 
 ########################
 ### Settings  ##########
