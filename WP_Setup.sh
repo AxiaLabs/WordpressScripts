@@ -40,9 +40,13 @@ wp user create $admin_username $admin_email --role=administrator --user_pass=$ad
 
 # Themes
 wp theme update --all
-wp theme install hello-elementor
+
+# PERMISSIONS
+sudo chown -R bitnami:daemon ~/apps/wordpress/htdocs
+
 
 # Child Theme
+wp theme install hello-elementor
 wp scaffold child-theme $client_slug --parent_theme=hello-elementor --theme_name="$client Theme" --author="Axia Labs" --author_uri="https://axialabs.com" --activate
 
 # Pages
